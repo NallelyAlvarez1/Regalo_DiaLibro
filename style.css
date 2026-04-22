@@ -1,0 +1,254 @@
+/* --- CONFIGURACIÓN BASE --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    overflow-x: hidden;
+
+    position: relative; /* 🔥 importante */
+    background: none;   /* quitamos el gradiente */
+}
+
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+
+    background:
+        linear-gradient(rgba(10,10,30,0.6), rgba(10,10,30,0.6)),
+        url("assets/img/fondo.jpg") center/cover no-repeat;
+
+    filter: blur(3px) brightness(0.8);
+    z-index: -1;
+}
+
+.container {
+    background-color: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 30px;
+    padding: 30px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    max-width: 600px;
+    width: 95%;
+    text-align: center;
+}
+
+.pantalla {
+    display: none;
+}
+
+.pantalla.activa {
+    display: block;
+    animation: fadeIn 0.5s;
+}
+
+/* --- TEXTOS --- */
+h1 {
+    font-size: 2.5em;
+    margin-bottom: 20px;
+    color: #ffd700;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+}
+
+h2 {
+    font-size: 1.5em;
+    margin-bottom: 15px;
+    color: #ffa500;
+}
+
+/* --- COMPONENTES --- */
+.boton {
+    background-color: #ff6b6b;
+    color: white;
+    border: none;
+    padding: 15px 30px;
+    font-size: 1.2em;
+    border-radius: 50px;
+    cursor: pointer;
+    margin: 20px 0;
+    transition: transform 0.2s, background-color 0.2s;
+}
+
+.boton:hover {
+    background-color: #ff5252;
+    transform: scale(1.05);
+}
+
+.boton.pequeño {
+    padding: 10px 20px;
+    font-size: 1em;
+}
+
+/* --- NIVEL 1: SOPA DE LETRAS --- */
+#wordsearch {
+    cursor: crosshair;
+    border: 3px solid #ffd700;
+    border-radius: 12px;
+    background-color: rgba(184, 195, 138, 0.9);
+    margin-top: 10px;
+    touch-action: none; /* Importante para móviles */
+}
+
+#wordList {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 15px;
+}
+
+#wordList li {
+    background: rgba(255,255,255,0.2);
+    padding: 5px 15px;
+    border-radius: 20px;
+    transition: all 0.3s;
+}
+
+#wordList li.found {
+    text-decoration: line-through;
+    color: #4CAF50;
+    background: rgba(76, 175, 80, 0.3);
+    font-weight: bold;
+}
+
+/* Nivel 2: Rompecabezas 4x4 */
+.rompecabezas-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2px; /* Reducimos el gap para que la imagen se vea más unida */
+    width: 340px; 
+    height: 340px;
+    margin: 20px auto;
+}
+
+.pieza {
+    width: 85px;  /* 340 / 4 */
+    height: 85px;
+    border: 1px solid rgba(255,255,255,0.3);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: rgba(255,255,255,0.5); /* Número semi-transparente */
+    font-weight: bold;
+    cursor: pointer;
+    background-repeat: no-repeat;
+}
+.pieza:hover {
+    background-color: #45a049;
+    transform: translateY(-2px);
+}
+
+
+.pistas-container {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.pista-img {
+    width: 80px;
+    height: 80px;
+    border-radius: 10px;
+    border: 2px solid #ffd700;
+    object-fit: cover;
+}
+
+#palabra-secreta-display {
+    font-size: 2.5em;
+    letter-spacing: 10px;
+    margin: 20px 0;
+    color: #ffd700;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+#vidas-container {
+    font-size: 1.5em;
+    color: #ff6b6b;
+    font-weight: bold;
+}
+
+#letra-input {
+    width: 60px;
+    padding: 10px;
+    font-size: 1.5em;
+    text-align: center;
+    border-radius: 10px;
+    border: none;
+    margin-right: 10px;
+}
+#letras-usadas span {
+    color: #ff4d4d; /* Un rojo llamativo */
+    font-weight: bold;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+.btn-siguiente {
+    display: block;
+    margin: 20px auto;
+    padding: 15px 30px;
+    background-color: #2ecc71; /* Verde éxito */
+    color: white;
+    font-size: 1.2rem;
+    font-weight: bold;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(46, 204, 113, 0.4);
+    animation: popIn 0.5s cubic-bezier(0.26, 0.53, 0.74, 1.48);
+}
+
+@keyframes popIn {
+    0% { transform: scale(0); }
+    100% { transform: scale(1); }
+}
+
+.btn-siguiente:hover {
+    background-color: #27ae60;
+    transform: translateY(-2px);
+}
+
+/* --- TIMER --- */
+#timer-container {
+    width: 100%;
+    height: 20px;
+    background: rgba(255,255,255,0.1);
+    border-radius: 10px;
+    margin-bottom: 20px;
+    position: relative;
+    overflow: hidden;
+}
+
+#timer-bar {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, #ff6b6b, #ffd700);
+    transition: width 1s linear;
+}
+
+/* --- ANIMACIONES --- */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.titulo-final {
+    font-size: 3em;
+    animation: brillar 1s infinite alternate;
+}
+
+@keyframes brillar {
+    from { text-shadow: 0 0 10px gold; }
+    to { text-shadow: 0 0 20px orange, 0 0 30px red; }
+}

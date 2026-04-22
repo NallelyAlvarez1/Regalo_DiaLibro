@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Mujerzuelas HD</title>
+  <link rel="stylesheet" href="style.css"> 
+  <link rel="icon" href="assets/img/icon.png">
+</head>
+<body>
+  <div class="container">
+      <div id="inicio" class="pantalla activa">
+          <h1>🎮 Un Desafío EXTREMO 🎮</h1>
+          <h2>Para El loco del José</h2>
+          <p>¿Será capaz de completarlo... sin reírse?</p>
+          <button id="btn-iniciar" class="boton" onclick="showGame(1)">✨ ¡Comenzar! ✨</button>
+      </div>
+
+      <div id="timer-container" style="display:none;">
+          <div id="timer-bar"></div>
+          <span id="timer-text">02:00</span>
+      </div>
+
+      <div id="game1" class="screen pantalla">
+          <h2>🌿 Nivel 1: Sopa de Letras 🌿</h2>
+          <p>Busca las cosas que te gustan 🫣</p>
+          <br>
+          <ul id="wordList"></ul>
+          <canvas id="wordsearch" width="320" height="320"></canvas>
+      </div>
+
+      <div id="game2" class="screen pantalla">
+          <h2>🔥 Nivel 2: El Rompecabezas 🔥</h2>
+          <p>Disfruta armandolo 🫣 es una bonita sorpresa</p>
+          <br>
+          <div id="puzzle" class="rompecabezas-grid"></div>
+      </div>
+
+      <div id="game3" class="screen pantalla">
+          <h2>🧠 Nivel 3: El Código Secreto 🧠</h2>
+          <p>Te doy dos pistas más, lo ocupamos arto y son 3 palabras.</p>
+          <br>
+          <section id="game3" class="screen">
+              <div class="pistas-container">
+                  <img src="assets/img/pista1.jpg" width="80">
+                  <img src="assets/img/pista2.jpg" width="80">
+                  <img src="assets/img/pista3.jpg" width="80">
+              </div>
+              
+              <div id="vidas-container" style="font-size: 1.5em; margin: 10px;">
+                  Vidas: ❤️ <span id="vidas-count">5</span>
+              </div>
+              
+              <div id="palabra-secreta-display" style="font-size: 2.5em; letter-spacing: 10px; margin: 20px;"></div>
+
+              <div style="margin-bottom: 20px;">
+                  <input type="text" id="letra-input" maxlength="1" style="width: 50px; text-align: center; font-size: 1.5em;">
+                  <button onclick="intentarLetra()" class="boton pequeño">Probar Letra</button>
+              </div>
+              
+              <p id="letras-usadas">Letras usadas: <span></span></p>
+          </section>
+      </div>
+
+      <div id="final" class="screen pantalla">
+          <h1>🎉 ¡Lo terminaste cabro! 🎉</h1>
+          <h2>Feliz Dia del Libro Alma Lectora de Mangas 😃</h2>
+          <p>Que tal el contenido no apto para horario de menores 🫣 fue una bonita sorpresa🤣</p>
+          <button class="boton" onclick="resetGame()">Jugar de nuevo</button>
+      </div>
+  </div>
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+<script src="script.js"></script>
+</body>
+</html> 
